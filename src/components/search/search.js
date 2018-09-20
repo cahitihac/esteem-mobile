@@ -9,9 +9,12 @@ import {
     ActivityIndicator,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import PostCard from "./searchCard";
+import Comment from "./comment";
 import { Navigation } from "react-native-navigation";
 import { lookupAccounts } from "../../providers/steem/dsteem";
 import { SEARCH_API_TOKEN } from "../../../config";
+import ActionSheet from 'react-native-actionsheet';
 
 export default class Search extends Component {
     constructor() {
@@ -31,53 +34,89 @@ export default class Search extends Component {
     };
 
     handleSearch = async text => {
-        if (text.length < 3) return;
         let users;
         let posts;
         let scroll_id;
 
         await this.setState({
             loading: true,
-            text: text 
+            text: text
         });
 
-        users = await lookupAccounts(text);
-
-        await this.setState({ users: users });
-
-        let data = { q: text };
-        await fetch("https://api.search.esteem.app/search", {
-            method: "POST",
-            headers: {
-                // TODO: Create a config file for authorization
-
-                Authorization: SEARCH_API_TOKEN,
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-        })
-            .then(result => result.json())
-            .then(result => {
-                posts = result.results;
-                scroll_id = result.scroll_id;
+        if (this.state.text.length > 2) {
+            users = await lookupAccounts(text);
+            console.log(users);
+            
+            await this.setState({ users: users });
+    
+            let data = { q: text };
+            await fetch("https://api.search.esteem.app/search", {
+                method: "POST",
+                headers: {
+                    Authorization: SEARCH_API_TOKEN,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
             })
-            .catch(error => {
-                console.log(error);
+                .then(result => result.json())
+                .then(result => {
+                    console.log(result);
+                    
+                    posts = result.results;
+                    scroll_id = result.scroll_id;
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+    
+            await this.setState({ loading: false });
+    
+            await this.setState({
+                posts: posts,
+                scroll_id: scroll_id,
             });
-
-        await this.setState({ loading: false });
-
-        await this.setState({
-            posts: posts,
-            scroll_id: scroll_id,
-        });
+        }
     };
 
+    showActionSheet = () => {
+        this.ActionSheet.show()
+    }
+
+    renderHeader = () => {
+        return (
+            this.state.posts.length > 0 ? (
+                <View style={{ flexDirection: 'row', backgroundColor: '#f6f6f6', paddingTop: 10, paddingHorizontal: 10 }}>
+                    <Text 
+                        onPress={this.showActionSheet}
+                        style={{ color: '#788187', fontSize: 12, fontWeight: '500' }}>
+                        TOP POSTS
+                    </Text>
+                    <Ionicons 
+                        size={15}
+                        color='#788187'
+                        name='md-arrow-dropdown'
+                        style={{ marginLeft: 5 }}
+                    />
+                    <ActionSheet
+                        ref={o => this.ActionSheet = o}
+                        title={'Which one do you like ?'}
+                        options={['Best', 'Relevance', 'Date', 'Close']}
+                        cancelButtonIndex={3}
+                        destructiveButtonIndex={3}
+                        onPress={(index) => { /* Save state and fetch new results */ }}
+                    />
+                </View>
+            ) : (
+                <View></View>
+            )
+        )
+    }
+    
     render() {
         return (
             <View
                 style={{
-                    backgroundColor: "rgba(0, 0, 0, 0.8)",
+                    backgroundColor: "white",
                     height: Dimensions.get("window").height,
                     paddingTop: 25,
                     flex: 1
@@ -121,74 +160,21 @@ export default class Search extends Component {
                     />
                 </View>
 
-                <View
-                    style={{
-                        paddingTop: 20,
-                        flex: 1,
-                        marginTop: 20,
-                    }}
-                >
-                    <FlatList
-                        data={this.state.users}
-                        showsVerticalScrollIndicator={false}
-                        horizontal={true}
-                        renderItem={({ item }) => (
-                            <View
-                                style={{ margin: 10, flexDirection: "column" }}
-                            >
-                                <Image
-                                    style={{
-                                        width: 50,
-                                        height: 50,
-                                        borderRadius: 25,
-                                        borderWidth: 1,
-                                        borderColor: "gray",
-                                    }}
-                                    source={{
-                                        uri: `https://steemitimages.com/u/${item}/avatar/small`,
-                                    }}
-                                />
-                                <Text
-                                    style={{
-                                        color: "#fff",
-                                        fontWeight: "500",
-                                        fontSize: 10,
-                                        overflow: "scroll",
-                                    }}
-                                >
-                                    @{item}
-                                </Text>
-                            </View>
-                        )}
-                        keyExtractor={(post, index) => index.toString()}
-                        removeClippedSubviews={true}
-                        onEndThreshold={0}
-                    />
-
-                    <FlatList
-                        data={this.state.posts}
-                        showsVerticalScrollIndicator={false}
-                        renderItem={({ item }) => (
-                            //  TODO: Create a component to list search results
-                            <View
-                                style={{
-                                    backgroundColor: "white",
-                                    borderRadius: 5,
-                                    marginHorizontal: 10,
-                                    marginVertical: 5,
-                                }}
-                            >
+                { /** USERS */  }
+                <View style={{ paddingTop: 10, marginTop: 10 }}>
+                    
+                    <View style={{ backgroundColor: 'white', borderRadius: 5, margin: 5 }}>
+                        { this.state.users.length > 0 ? (
+                            <Text style={{ color: '#788187', left: 10, fontSize: 15 }}>Users</Text>
+                        ) : (<View></View>) }
+                        <FlatList
+                            data={this.state.users}
+                            showsVerticalScrollIndicator={false}
+                            horizontal={true}
+                            renderItem={({ item }) => (
                                 <View
-                                    style={{
-                                        flexDirection: "row",
-                                    }}
-                                >
+                                    style={{ margin: 10, flexDirection: "row" }}>
                                     <Image
-                                        source={{
-                                            uri: `https://steemitimages.com/u/${
-                                                item.author
-                                            }/avatar/small`,
-                                        }}
                                         style={{
                                             width: 40,
                                             height: 40,
@@ -196,13 +182,47 @@ export default class Search extends Component {
                                             borderWidth: 1,
                                             borderColor: "gray",
                                         }}
+                                        source={{
+                                            uri: `https://steemitimages.com/u/${item}/avatar/small`,
+                                        }}
                                     />
-                                    <Text>
-                                        {item.author} ({item.author_rep})
-                                    </Text>
+                                    <View style={{ alignItems: 'center' }}>
+                                        <Text
+                                            style={{
+                                                fontWeight: "500",
+                                                fontSize: 13,
+                                                left: 8,
+                                                top: 12
+                                            }}>
+                                            @{item}
+                                        </Text>
+                                    </View>
                                 </View>
-                            </View>
-                        )}
+                            )}
+                            keyExtractor={(post, index) => index.toString()}
+                            removeClippedSubviews={true}
+                            onEndThreshold={0}
+                        />
+                    </View>
+                </View>
+
+                { /** POSTS */  }
+                <View style={{ flex: 1, backgroundColor: '#f6f6f6', margin: 0, borderRadius: 5 }}>
+                    <FlatList
+                        data={this.state.posts}
+                        showsVerticalScrollIndicator={false}
+                        ListHeaderComponent={this.renderHeader}
+                        renderItem={({ item }) => {
+                            if (item.permlink.startsWith('re-')) {
+                                return (
+                                    <Comment comment={item} />
+                                )
+                            } else {
+                                return (
+                                    <PostCard content={item}/>
+                                )
+                            }
+                        }}
                         keyExtractor={(post, index) => index.toString()}
                         removeClippedSubviews={true}
                         onEndThreshold={0}
