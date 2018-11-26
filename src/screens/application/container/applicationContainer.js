@@ -10,6 +10,8 @@ import firebase from 'react-native-firebase';
 import { ApplicationScreen } from '..';
 
 addLocaleData([...en, ...tr]);
+
+/* eslint-disable */
 // symbol polyfills
 global.Symbol = require('core-js/es6/symbol');
 require('core-js/fn/symbol/iterator');
@@ -18,6 +20,7 @@ require('core-js/fn/symbol/iterator');
 require('core-js/fn/map');
 require('core-js/fn/set');
 require('core-js/fn/array/find');
+/* eslint-enable */
 
 class ApplicationContainer extends Component {
   constructor() {
@@ -45,7 +48,7 @@ class ApplicationContainer extends Component {
     this.notificationOpenedListener();
   }
 
-  async getToken() {
+  getToken = async () => {
     let fcmToken = await AsyncStorage.getItem('fcmToken');
     console.log('fcmToken :', fcmToken);
     if (!fcmToken) {
@@ -56,18 +59,18 @@ class ApplicationContainer extends Component {
         await AsyncStorage.setItem('fcmToken', fcmToken);
       }
     }
-  }
+  };
 
-  async checkPermission() {
+  checkPermission = async () => {
     const enabled = await firebase.messaging().hasPermission();
     if (enabled) {
       this.getToken();
     } else {
       this.requestPermission();
     }
-  }
+  };
 
-  async requestPermission() {
+  requestPermission = async () => {
     try {
       await firebase.messaging().requestPermission();
       // User has authorised
@@ -76,9 +79,9 @@ class ApplicationContainer extends Component {
       // User has rejected permissions
       console.log('permission rejected');
     }
-  }
+  };
 
-  async createNotificationListeners() {
+  createNotificationListeners = async () => {
     /*
     * Triggered when a particular notification has been received in foreground
     * */
@@ -88,7 +91,8 @@ class ApplicationContainer extends Component {
     });
 
     /*
-    * If your app is in background, you can listen for when a notification is clicked / tapped / opened as follows:
+    * If your app is in background, you can listen for when
+    * a notification is clicked / tapped / opened as follows:
     * */
     this.notificationOpenedListener = firebase
       .notifications()
@@ -98,7 +102,8 @@ class ApplicationContainer extends Component {
       });
 
     /*
-    * If your app is closed, you can check if it was opened by a notification being clicked / tapped / opened as follows:
+    * If your app is closed, you can check if it was opened
+    * by a notification being clicked / tapped / opened as follows:
     * */
     const notificationOpen = await firebase.notifications().getInitialNotification();
     if (notificationOpen) {
@@ -112,13 +117,13 @@ class ApplicationContainer extends Component {
       // process data message
       console.log(JSON.stringify(message));
     });
-  }
+  };
 
-  showAlert(title, body) {
+  showAlert = (title, body) => {
     Alert.alert(title, body, [{ text: 'OK', onPress: () => console.log('OK Pressed') }], {
       cancelable: false,
     });
-  }
+  };
 
   render() {
     const { selectedLanguage } = this.props;
