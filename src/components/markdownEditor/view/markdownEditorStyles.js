@@ -44,6 +44,6 @@ export default EStyleSheet.create({
     color: '$primaryDarkGray',
   },
   icon: {
-    color: '$iconColor',
+    color: '$editorButtonColor',
   },
 });

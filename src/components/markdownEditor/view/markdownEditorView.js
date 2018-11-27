@@ -57,6 +57,10 @@ export default class MarkdownEditorView extends Component {
     });
   };
 
+  _handleOnImageButtonPress=() => {
+    alert("image");
+  }
+
   _getState = () => {
     this.setState({
       selection: {
@@ -126,7 +130,7 @@ export default class MarkdownEditorView extends Component {
           name="link"
           onPress={() => Formats[9].onPress({ getState, setState })}
         />
-        <IconButton style={styles.rightIcons} size={20} iconType="Feather" name="image" />
+        <IconButton onPress={() => this._handleOnImageButtonPress()} style={styles.rightIcons} size={20} iconStyle={styles.icon} iconType="FontAwesome" name="image" />
         <DropdownButton
           style={styles.dropdownStyle}
           options={['option1', 'option2', 'option3', 'option4']}
