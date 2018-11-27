@@ -10,6 +10,7 @@ import { IconButton } from '../../iconButton';
 import { DropdownButton } from '../../dropdownButton';
 import { StickyBar } from '../../basicUIElements';
 import { TextInput } from '../../textInput';
+import { CameraRollModal } from '../../cameraRollModal';
 // Styles
 import styles from './markdownEditorStyles';
 import markdownStyle from './markdownPreviewStyles';
@@ -20,6 +21,7 @@ export default class MarkdownEditorView extends Component {
     this.state = {
       text: '',
       selection: { start: 0, end: 0 },
+      isCameraRollModalOpen: false,
     };
   }
 
@@ -57,9 +59,14 @@ export default class MarkdownEditorView extends Component {
     });
   };
 
-  _handleOnImageButtonPress=() => {
-    alert("image");
-  }
+  _handleOnImageButtonPress = () => {
+    alert('image');
+    this.setState({ isCameraRollModalOpen: true });
+  };
+
+  _handleOnCloseSearch = () => {
+    this.setState({ isCameraRollModalOpen: false });
+  };
 
   _getState = () => {
     this.setState({
@@ -130,7 +137,14 @@ export default class MarkdownEditorView extends Component {
           name="link"
           onPress={() => Formats[9].onPress({ getState, setState })}
         />
-        <IconButton onPress={() => this._handleOnImageButtonPress()} style={styles.rightIcons} size={20} iconStyle={styles.icon} iconType="FontAwesome" name="image" />
+        <IconButton
+          onPress={() => this._handleOnImageButtonPress()}
+          style={styles.rightIcons}
+          size={20}
+          iconStyle={styles.icon}
+          iconType="FontAwesome"
+          name="image"
+        />
         <DropdownButton
           style={styles.dropdownStyle}
           options={['option1', 'option2', 'option3', 'option4']}
@@ -144,10 +158,11 @@ export default class MarkdownEditorView extends Component {
 
   render() {
     const { isPreviewActive, intl } = this.props;
-    const { text, selection } = this.state;
+    const { text, selection, isCameraRollModalOpen } = this.state;
 
     return (
       <KeyboardAvoidingView style={styles.container} behavior="padding">
+        <CameraRollModal isOpen={isCameraRollModalOpen} handleOnClose={this._handleOnCloseSearch} />
         {!isPreviewActive ? (
           <TextInput
             multiline

@@ -29,9 +29,6 @@ class CameraRollModalContainer extends Component {
   // Component Functions
 
   render() {
-    // eslint-disable-next-line
-    const {} = this.props;
-
     return <CameraRollModalView />;
   }
 }

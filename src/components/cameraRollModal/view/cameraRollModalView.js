@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import {} from 'react-native';
+import {
+  CameraRoll, View, ScrollView, Image, Button,
+} from 'react-native';
 
 // Constants
 
 // Components
+import { Modal } from '../..';
 
 // Styles
-// eslint-disable-next-line
-import styles from './_styles';
+// import styles from './cameraRollModalStyles';
 
 class CameraRollModalView extends Component {
   /* Props
@@ -23,13 +25,40 @@ class CameraRollModalView extends Component {
   // Component Life Cycles
 
   // Component Functions
+  _handleButtonPress = () => {
+    CameraRoll.getPhotos({
+      first: 20,
+      assetType: 'Photos',
+    })
+      .then((r) => {
+        this.setState({ photos: r.edges });
+      })
+      .catch((err) => {
+        // Error Loading Images
+      });
+  };
 
   render() {
-    // eslint-disable-next-line
-    const {} = this.props;
-
-    // eslint-disable-next-line
-    return <ElementName />;
+    const { isOpen } = this.props;
+    return (
+      <Modal isOpen={isOpen} isFullScreen swipeToClose backButtonClose isTransparent>
+        <View>
+          <Button title="Load Images" onPress={this._handleButtonPress} />
+          <ScrollView>
+            {this.state.photos.map((p, i) => (
+              <Image
+                key={i}
+                style={{
+                  width: 300,
+                  height: 100,
+                }}
+                source={{ uri: p.node.image.uri }}
+              />
+            ))}
+          </ScrollView>
+        </View>
+      </Modal>
+    );
   }
 }
 
