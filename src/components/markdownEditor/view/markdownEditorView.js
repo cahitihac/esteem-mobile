@@ -60,7 +60,6 @@ export default class MarkdownEditorView extends Component {
   };
 
   _handleOnImageButtonPress = () => {
-    alert('image');
     this.setState({ isCameraRollModalOpen: true });
   };
 

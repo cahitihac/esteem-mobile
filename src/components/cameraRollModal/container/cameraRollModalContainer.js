@@ -24,17 +24,9 @@ class CameraRollModalContainer extends Component {
     this.state = {};
   }
 
-  // Component Life Cycle Functions
-
-  // Component Functions
-
   render() {
-    return <CameraRollModalView />;
+    return <CameraRollModalView {...this.props} />;
   }
 }
 
-const mapStateToProps = state => ({
-  user: state.user.user,
-});
-
-export default connect(mapStateToProps)(CameraRollModalContainer);
+export default CameraRollModalContainer;

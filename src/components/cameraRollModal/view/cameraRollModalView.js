@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import {
-  CameraRoll, View, ScrollView, Image, Button,
+  CameraRoll,
+  View,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+  FlatList,
+  Dimensions,
 } from 'react-native';
 
 // Constants
@@ -9,7 +15,9 @@ import {
 import { Modal } from '../..';
 
 // Styles
-// import styles from './cameraRollModalStyles';
+import styles from './cameraRollModalStyles';
+
+const DEVICE_WIDTH = Dimensions.get('window').width;
 
 class CameraRollModalView extends Component {
   /* Props
@@ -23,11 +31,18 @@ class CameraRollModalView extends Component {
   }
 
   // Component Life Cycles
+  componentWillReceiveProps(nextProps) {
+    const { isOpen } = this.props;
+
+    if (nextProps.isOpen && nextProps.isOpen !== isOpen) {
+      this._getPhotos();
+    }
+  }
 
   // Component Functions
-  _handleButtonPress = () => {
+  _getPhotos = () => {
     CameraRoll.getPhotos({
-      first: 20,
+      first: 1000000,
       assetType: 'Photos',
     })
       .then((r) => {
@@ -38,24 +53,41 @@ class CameraRollModalView extends Component {
       });
   };
 
+  _handleOnSelectImage = (item) => {
+    console.log(item.node.image.uri);
+    // item.node.image.uri;
+  };
+
   render() {
-    const { isOpen } = this.props;
+    const { isOpen, handleOnClose } = this.props;
+    const { photos } = this.state;
+
     return (
-      <Modal isOpen={isOpen} isFullScreen swipeToClose backButtonClose isTransparent>
-        <View>
-          <Button title="Load Images" onPress={this._handleButtonPress} />
-          <ScrollView>
-            {this.state.photos.map((p, i) => (
-              <Image
-                key={i}
-                style={{
-                  width: 300,
-                  height: 100,
-                }}
-                source={{ uri: p.node.image.uri }}
-              />
-            ))}
-          </ScrollView>
+      <Modal
+        title="Photos"
+        animationType="slide"
+        handleOnModalClose={handleOnClose}
+        isOpen={isOpen}
+        isFullScreen
+      >
+        <View style={styles.wrapper}>
+          <FlatList
+            style={styles.flatList}
+            numColumns={3}
+            // horizontal
+            // onEndReached={loadMore}
+            data={photos}
+            keyExtractor={index => index}
+            renderItem={({ item, i }) => (
+              <TouchableOpacity onPress={() => this._handleOnSelectImage(item)}>
+                <Image
+                  key={i}
+                  style={[styles.image, { width: DEVICE_WIDTH / 3 }]}
+                  source={{ uri: item.node.image.uri }}
+                />
+              </TouchableOpacity>
+            )}
+          />
         </View>
       </Modal>
     );
