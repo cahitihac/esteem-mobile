@@ -8,7 +8,7 @@ import {
   FlatList,
   Dimensions,
 } from 'react-native';
-
+import ImagePicker from 'react-native-image-crop-picker';
 // Constants
 
 // Components
@@ -36,21 +36,28 @@ class CameraRollModalView extends Component {
 
     if (nextProps.isOpen && nextProps.isOpen !== isOpen) {
       this._getPhotos();
+      ImagePicker.openPicker({
+        width: 300,
+        height: 400,
+        cropping: true,
+      }).then((image) => {
+        console.log(image);
+      });
     }
   }
 
   // Component Functions
   _getPhotos = () => {
-    CameraRoll.getPhotos({
-      first: 1000000,
-      assetType: 'Photos',
-    })
-      .then((r) => {
-        this.setState({ photos: r.edges });
-      })
-      .catch((err) => {
-        // Error Loading Images
-      });
+    // CameraRoll.getPhotos({
+    //   first: 1000000,
+    //   assetType: 'Photos',
+    // })
+    //   .then((r) => {
+    //     this.setState({ photos: r.edges });
+    //   })
+    //   .catch((err) => {
+    //     // Error Loading Images
+    //   });
   };
 
   _handleOnSelectImage = (item) => {
@@ -69,8 +76,9 @@ class CameraRollModalView extends Component {
         handleOnModalClose={handleOnClose}
         isOpen={isOpen}
         isFullScreen
+        isCloseButton
       >
-        <View style={styles.wrapper}>
+        {/* <View style={styles.wrapper}>
           <FlatList
             style={styles.flatList}
             numColumns={3}
@@ -88,7 +96,7 @@ class CameraRollModalView extends Component {
               </TouchableOpacity>
             )}
           />
-        </View>
+        </View> */}
       </Modal>
     );
   }

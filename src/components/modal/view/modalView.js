@@ -42,7 +42,7 @@ export default class Modal extends Component {
       isTransparent,
       title,
       animationType,
-      isHeader,
+      isCloseButton,
     } = this.props;
     return (
       <ModalBox
@@ -57,17 +57,19 @@ export default class Modal extends Component {
         onShow={() => this._handleOnOpen(this)}
         {...this.props}
       >
-        {isHeader && (
+        {title && (
           <SafeAreaView style={styles.safeArea}>
             <View style={styles.modalHeader}>
               <Text style={styles.headerTitle}>{title}</Text>
-              <IconButton
-                style={styles.closeButton}
-                iconType="FontAwesome"
-                iconStyle={styles.closeIcon}
-                name="close"
-                onPress={() => this._handleOnClose()}
-              />
+              {isCloseButton && (
+                <IconButton
+                  style={styles.closeButton}
+                  iconType="FontAwesome"
+                  iconStyle={styles.closeIcon}
+                  name="close"
+                  onPress={() => this._handleOnClose()}
+                />
+              )}
             </View>
           </SafeAreaView>
         )}
