@@ -31,8 +31,8 @@ class ApplicationContainer extends Component {
   }
 
   async componentDidMount() {
-    this.checkPermission();
-    this.createNotificationListeners();
+    // this.checkPermission();
+    // this.createNotificationListeners();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -44,8 +44,8 @@ class ApplicationContainer extends Component {
   }
 
   componentWillUnmount() {
-    this.notificationListener();
-    this.notificationOpenedListener();
+    // this.notificationListener();
+    // this.notificationOpenedListener();
   }
 
   getToken = async () => {

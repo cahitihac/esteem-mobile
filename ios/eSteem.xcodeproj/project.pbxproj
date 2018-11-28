@@ -52,6 +52,7 @@
 		555B95755FD74950AAAD68E9 /* RobotoMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 044930AF6BF7488DA7F02A8F /* RobotoMono-Regular.ttf */; };
 		5BDB248B001A417EBCE5CCD7 /* libRNFirebase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D5E2D774BB04ECF9B4B56F4 /* libRNFirebase.a */; };
 		6E4C52029EBF42989F818B8A /* libRNViewOverflow.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BBFAB592DFA5475CBA7E7567 /* libRNViewOverflow.a */; };
+		6F6DF45E21AED0DF00E0A36D /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F6DF42A21AED0DE00E0A36D /* UserNotifications.framework */; };
 		7429574AA9E24BDCB4EF596F /* libAppCenterReactNativeCrashes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 433413DEC10A40BBA49C187D /* libAppCenterReactNativeCrashes.a */; };
 		7886D60DAE5D4F5FADF6E71D /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E8173A796BF9451D99EC23CB /* SimpleLineIcons.ttf */; };
 		7F1D55EAEBB44D7BA6C5D7C9 /* libRealmReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB14BA1B2BC4E7F975AB092 /* libRealmReact.a */; };
@@ -503,6 +504,7 @@
 		617E4B90481842DBB13C3A11 /* AppCenter-Config.plist */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.plist.xml; name = "AppCenter-Config.plist"; path = "eSteem/AppCenter-Config.plist"; sourceTree = "<group>"; };
 		69E6D909D6B648F682477D55 /* libAppCenterReactNativePush.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAppCenterReactNativePush.a; sourceTree = "<group>"; };
 		6D37F7E2845F42099DED229F /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = ../src/assets/Fonts/Octicons.ttf; sourceTree = "<group>"; };
+		6F6DF42A21AED0DE00E0A36D /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		70B117F9F2927459CA5BDA3C /* libPods-eSteem.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-eSteem.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7609259AA619FAA7DA1B0779 /* libPods-eSteem-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-eSteem-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
@@ -559,6 +561,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F6DF45E21AED0DF00E0A36D /* UserNotifications.framework in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				11D1A2F320CAFA9E000508D9 /* libRCTAnimation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -840,6 +843,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6F6DF42A21AED0DE00E0A36D /* UserNotifications.framework */,
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
 				70B117F9F2927459CA5BDA3C /* libPods-eSteem.a */,
 				7609259AA619FAA7DA1B0779 /* libPods-eSteem-tvOS.a */,
@@ -1017,6 +1021,8 @@
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
+				2285A80A29BBB19504773683 /* [CP] Embed Pods Frameworks */,
+				F349D4527EC54D31556EB004 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1037,6 +1043,8 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				CB9AAE33DFFB8AFE0337F260 /* [CP] Embed Pods Frameworks */,
+				E894DFE7AF465EB3FAFEB737 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1056,6 +1064,8 @@
 				2D02E4781E0B4A5D006451C7 /* Frameworks */,
 				2D02E4791E0B4A5D006451C7 /* Resources */,
 				2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */,
+				371584FB5D4D7974A436D5FD /* [CP] Embed Pods Frameworks */,
+				3BF11C11AC99A31483385D80 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1074,6 +1084,8 @@
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
 				2D02E48D1E0B4A5D006451C7 /* Frameworks */,
 				2D02E48E1E0B4A5D006451C7 /* Resources */,
+				DF3F38B5127F9A9D2725241F /* [CP] Embed Pods Frameworks */,
+				EB00B36BEBF2595124C50C8A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1100,6 +1112,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = V4RRE3CHH2;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1706,6 +1719,21 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		2285A80A29BBB19504773683 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-eSteemTests/Pods-eSteemTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1719,6 +1747,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+		};
+		371584FB5D4D7974A436D5FD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-eSteem-tvOS/Pods-eSteem-tvOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3BF11C11AC99A31483385D80 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-eSteem-tvOS/Pods-eSteem-tvOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		5E534A2EAD164CC1A84827FD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1754,6 +1812,81 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CB9AAE33DFFB8AFE0337F260 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-eSteem/Pods-eSteem-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DF3F38B5127F9A9D2725241F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-eSteem-tvOSTests/Pods-eSteem-tvOSTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E894DFE7AF465EB3FAFEB737 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-eSteem/Pods-eSteem-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EB00B36BEBF2595124C50C8A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-eSteem-tvOSTests/Pods-eSteem-tvOSTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F349D4527EC54D31556EB004 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-eSteemTests/Pods-eSteemTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1931,6 +2064,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = eSteem/eSteem.entitlements;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = V4RRE3CHH2;
@@ -1958,6 +2092,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = app.esteem.mobile;
 				PRODUCT_NAME = eSteem;
+				PROVISIONING_PROFILE_SPECIFIER = DevelopmentEsteemProv;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1969,6 +2104,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = eSteem/eSteem.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = V4RRE3CHH2;
 				HEADER_SEARCH_PATHS = (
@@ -1995,6 +2132,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = app.esteem.mobile;
 				PRODUCT_NAME = eSteem;
+				PROVISIONING_PROFILE_SPECIFIER = DistributionEsteemProv;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
