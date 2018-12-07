@@ -17,8 +17,6 @@ export default EStyleSheet.create({
   tabbarItem: {
     flex: 1,
     backgroundColor: '$primaryBackgroundColor',
-    minWidth: '$deviceWidth',
-    height: '$deviceHeight / 1.95',
   },
   mainButtonWrapper: {
     position: 'absolute',

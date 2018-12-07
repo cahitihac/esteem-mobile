@@ -22,7 +22,7 @@ export default EStyleSheet.create({
   },
   text: {
     color: 'white',
-    fontWeight: '400',
+    fontWeight: 'bold',
     alignSelf: 'center',
     fontSize: 14,
     paddingLeft: 10,

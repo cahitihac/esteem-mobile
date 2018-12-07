@@ -4,7 +4,7 @@ export default EStyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    height: '$deviceHeight / 4',
+    height: 282,
     backgroundColor: '$primaryBackgroundColor',
   },
   safeArea: {
@@ -12,10 +12,9 @@ export default EStyleSheet.create({
   },
   body: {
     flexDirection: 'row',
-    maxHeight: '$deviceHeight / 4',
     overflow: 'hidden',
     backgroundColor: '$primaryBackgroundColor',
-    height: '$deviceHeight / 3.9',
+    height: 216,
   },
   description: {
     textAlignVertical: 'center',
@@ -32,10 +31,9 @@ export default EStyleSheet.create({
   },
   mascot: {
     position: 'absolute',
-    width: 160,
-
-    height: 227,
-    marginTop: 10,
+    width: 180,
+    height: 247,
+    marginTop: 55,
     right: -20,
   },
   titleText: {
