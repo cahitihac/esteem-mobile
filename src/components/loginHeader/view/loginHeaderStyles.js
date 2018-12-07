@@ -4,7 +4,7 @@ export default EStyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    height: 282,
+    height: 250,
     backgroundColor: '$primaryBackgroundColor',
   },
   safeArea: {
@@ -14,7 +14,7 @@ export default EStyleSheet.create({
     flexDirection: 'row',
     overflow: 'hidden',
     backgroundColor: '$primaryBackgroundColor',
-    height: 216,
+    height: 186,
   },
   description: {
     textAlignVertical: 'center',
@@ -33,7 +33,7 @@ export default EStyleSheet.create({
     position: 'absolute',
     width: 180,
     height: 247,
-    marginTop: 55,
+    marginTop: 35,
     right: -20,
   },
   titleText: {
