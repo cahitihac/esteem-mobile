@@ -108,6 +108,8 @@ class PostDisplayView extends Component {
     const { post } = this.props;
     const { postHeight, scrollHeight, isLoadedComments } = this.state;
 
+    console.log('post :', post);
+
     const isPostEnd = scrollHeight > postHeight;
     const isGetComment = scrollHeight + 300 > postHeight;
 

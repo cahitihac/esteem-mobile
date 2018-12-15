@@ -30,7 +30,17 @@ class CommentsContainer extends Component {
   }
 
   // Component Life Cycle Functions
+
   componentDidMount() {
+    this.__getComments();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('nextProps :', nextProps);
+  }
+  // Component Functions
+
+  _getComments = () => {
     const { author, permlink } = this.props;
 
     getComments(author, permlink)
@@ -42,8 +52,7 @@ class CommentsContainer extends Component {
       .catch((error) => {
         // alert(error);
       });
-  }
-  // Component Functions
+  };
 
   _handleOnReplyPress = (item) => {
     const { navigation } = this.props;
