@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 // Actions
-import { getUserData } from '../../../realm/realm';
+import { getUserData, getUserDataWithUsername } from '../../../realm/realm';
 import { switchAccount } from '../../../providers/steem/auth';
 import { updateCurrentAccount } from '../../../redux/actions/accountAction';
-import { openPinCodeModal } from '../../../redux/actions/applicationActions';
+
+import { openPinCodeModal, logout } from '../../../redux/actions/applicationActions';
 
 // Constanst
 import { default as ROUTES } from '../../../constants/routeNames';
@@ -28,26 +29,36 @@ class SideMenuContainer extends Component {
   }
 
   // Component Life Cycle Functions
-
   componentWillMount() {
-    const accounts = [];
+    const { otherAccounts } = this.props;
 
-    getUserData().then((userData) => {
-      userData.forEach((element) => {
-        accounts.push({
-          name: `@${element.username}`,
-          username: element.username,
-        });
-      });
-      accounts.push({
-        name: 'Add Account',
-        route: ROUTES.SCREENS.LOGIN,
-        icon: 'plus',
-        id: 'add_account',
-      });
-      this.setState({ accounts });
-    });
+    this._createUserList(otherAccounts);
   }
+
+  componentWillReceiveProps(nextProps) {
+    const { otherAccounts, isLoggedIn } = this.props;
+
+    if (isLoggedIn && otherAccounts !== nextProps.otherAccounts) {
+      this._createUserList(nextProps.otherAccounts);
+    }
+  }
+
+  _createUserList = (otherAccounts) => {
+    const accounts = [];
+    otherAccounts.forEach((element) => {
+      accounts.push({
+        name: `@${element.username}`,
+        username: element.username,
+      });
+    });
+    accounts.push({
+      name: 'Add Account',
+      route: ROUTES.SCREENS.LOGIN,
+      icon: 'add',
+      id: 'add_account',
+    });
+    this.setState({ accounts });
+  };
 
   // Component Functions
 
@@ -60,15 +71,25 @@ class SideMenuContainer extends Component {
 
   _switchAccount = (anchor = null) => {
     const { dispatch, currentAccount, navigation } = this.props;
-    const username = anchor.slice(1);
-    dispatch(openPinCodeModal());
 
-    if (username !== currentAccount.name) {
-      switchAccount(username).then((accountData) => {
-        dispatch(updateCurrentAccount(accountData));
+    if (anchor !== currentAccount.name) {
+      switchAccount(anchor).then((accountData) => {
+        const realmData = getUserDataWithUsername(anchor);
+        const _currentAccount = accountData;
+
+        _currentAccount.username = _currentAccount.name;
+        _currentAccount.local = realmData[0];
+
+        dispatch(updateCurrentAccount(_currentAccount));
         navigation.closeDrawer();
       });
     }
+  };
+
+  _handleLogout = () => {
+    const { dispatch } = this.props;
+
+    dispatch(logout());
   };
 
   render() {
@@ -83,6 +104,7 @@ class SideMenuContainer extends Component {
         accounts={accounts}
         currentAccount={currentAccount}
         switchAccount={this._switchAccount}
+        handleLogout={this._handleLogout}
       />
     );
   }
@@ -90,7 +112,8 @@ class SideMenuContainer extends Component {
 
 const mapStateToProps = state => ({
   isLoggedIn: state.application.isLoggedIn,
-  currentAccount: state.account.currentAccount || {},
+  currentAccount: state.account.currentAccount,
+  otherAccounts: state.account.otherAccounts,
 });
 
 export default connect(mapStateToProps)(SideMenuContainer);
