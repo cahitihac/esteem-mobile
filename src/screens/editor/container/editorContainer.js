@@ -282,12 +282,12 @@ class EditorContainer extends Component {
 
   _submitPost = async (fields) => {
     const {
-      navigation, currentAccount, pinCode, intl,
+      navigation, currentAccount, pinCode, intl, metaData,
     } = this.props;
 
     if (currentAccount) {
       this.setState({ isPostSending: true });
-
+      console.log('fields :', fields);
       const meta = extractMetadata(fields.body);
       const jsonMeta = makeJsonMetadata(meta, fields.tags);
       // TODO: check if permlink is available github: #314 https://github.com/esteemapp/esteem-mobile/pull/314
@@ -401,7 +401,7 @@ class EditorContainer extends Component {
       if (patch && patch.length < Buffer.from(oldBody, 'utf-8').length) {
         newBody = patch;
       }
-
+console.log('fields :', fields);
       const meta = extractMetadata(fields.body);
       const jsonMeta = makeJsonMetadata(meta, fields.tags);
 
@@ -473,7 +473,7 @@ class EditorContainer extends Component {
   };
 
   render() {
-    const { isLoggedIn, isDarkTheme } = this.props;
+    const { isLoggedIn, isDarkTheme, metaData } = this.props;
     const {
       autoFocusText,
       draftPost,
@@ -488,7 +488,7 @@ class EditorContainer extends Component {
       post,
       uploadedImage,
     } = this.state;
-
+console.log('metaData :', metaData);
     return (
       <EditorScreen
         autoFocusText={autoFocusText}

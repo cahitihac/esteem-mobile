@@ -20,6 +20,7 @@ class PostContainer extends Component {
       post: null,
       error: null,
       isNewPost: false,
+      metaData: null,
     };
   }
 
@@ -41,7 +42,8 @@ class PostContainer extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { navigation } = this.props;
-    const { isFetch: nextIsFetch } = nextProps.navigation.state && nextProps.navigation.state.params;
+    const { isFetch: nextIsFetch } = nextProps.navigation.state
+      && nextProps.navigation.state.params;
 
     if (nextIsFetch) {
       const { author, permlink } = navigation.state && navigation.state.params;
@@ -62,7 +64,8 @@ class PostContainer extends Component {
     await getPost(_author, _permlink, isLoggedIn && currentAccount.username)
       .then((result) => {
         if (result) {
-          this.setState({ post: result });
+          console.log('result :', result);
+          this.setState({ post: result, metaData: result.json_metadata });
         }
       })
       .catch((err) => {
@@ -72,7 +75,9 @@ class PostContainer extends Component {
 
   render() {
     const { currentAccount, isLoggedIn } = this.props;
-    const { post, error, isNewPost } = this.state;
+    const {
+      post, error, isNewPost, metaData,
+    } = this.state;
 
     return (
       <PostScreen
@@ -83,6 +88,7 @@ class PostContainer extends Component {
         fetchPost={this._loadPost}
         isFetchComments
         isNewPost={isNewPost}
+        metaData={metaData}
       />
     );
   }

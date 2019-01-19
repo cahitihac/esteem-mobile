@@ -57,13 +57,14 @@ class PostDisplayContainer extends Component {
   };
 
   _handleOnEditPress = () => {
-    const { post, navigation } = this.props;
+    const { post, navigation, metaData } = this.props;
     navigation.navigate({
       routeName: ROUTES.SCREENS.EDITOR,
       params: {
         isEdit: true,
         post,
         fetchPost: this._fetchPost,
+        metaData,
       },
     });
   };
@@ -75,7 +76,9 @@ class PostDisplayContainer extends Component {
   };
 
   render() {
-    const { post, currentAccount, isLoggedIn } = this.props;
+    const {
+      post, currentAccount, isLoggedIn,
+    } = this.props;
 
     return (
       <PostDisplayView
